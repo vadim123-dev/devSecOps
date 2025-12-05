@@ -6,5 +6,5 @@ while number <= 100:
         print('boom')
     else:
         print(number)
-   number+=1
+    number+=1
 
