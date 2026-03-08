@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: users
+  labels: 
+     app: users
+spec:
+  containers:
+  - name: users
+    image: vadim38/users:02
+    ports:
+    - containerPort: 5000

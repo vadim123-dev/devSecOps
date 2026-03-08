@@ -43,5 +43,5 @@ def extract_user_data(request):
     return User(user_id, user_name)
 
 
-app.run()
+app.run(host="0.0.0.0", port=5000)
 

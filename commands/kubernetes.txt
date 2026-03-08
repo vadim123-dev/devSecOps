@@ -1,0 +1,76 @@
+-------------- PROFILES ------------------------------------------------------
+Profile start      =  minikube start -p <cluster name> -n <number of nodes>
+Profiles show list =  minikube profile list
+Profile delete     =  minikube delete -p <profile name>
+------------------------------------------------------------------------------
+
+-------------- NODES (MACHINES)-----------------------------------------------
+Nodes get all                    = kubectl get nodes
+Nodes get all, with more details = kubectl get nodes -o wide
+Node start from image            = kubectl create deployment <name of deployment> --image=<image name>
+------------------------------------------------------------------------------
+
+-------------- PODS (CONTAINER WRAPPER) --------------------------------------
+Pods start from file yaml         = kubectl apply -f <file name.yaml>
+Pods list in 'default' name space = kubectl get pods
+Pods list in all name-spaces      = kubectl get pods --all-namespaces
+Pods list with more detail        = kubectl get pods -o wide
+Pod get more information          = kubectl describe pod <pod name>
+Pod stop by file name             = kubectl delete -f <file name.yaml>
+Pod stop by name                  = kubectl delete pod hello-pod
+Pod replace                       = kubectl replace --force -f <file name.yaml>
+Pods watch live                   = kubectl get pods --watch
+Pods exec into                    = kubectl exec -it <pod name> -- sh
+Pods show by labels               = kubectl get pods --selector=app.k8s.io/name==appB
+------------------------------------------------------------------------------
+
+-------------- RESOURCE MANAGEMENT -----------------------------------------------------------
+Enable the metrics server in minikube = minikube addons enable metrics-server -p vadim-cluster
+Test installation                     = kubectl get --raw /apis/metrics.k8s.io/
+-----------------------------------------------------------------------------------
+
+
+--------------- SERVICES ----------------------------------------------------------
+Services get list                     = kubectl get services
+Service delete                        = kubectl delete services <name of the service>
+-----------------------------------------------------------------------------------
+
+
+
+----------- CERTIFICATE AND USERS ---------------------------------------------
+CLUSTER WILL ACCEPT REQUESTS FROM ANY USER WITH PUBLIC KEY THAT WAS SIGNED BY CERTIFICATE AUTHORITY OF THE CLUSTER
+MEANING: USER LIKE MY SELF WILL CREATE PRIVATE KEY, THEN CREATE A CERTIFICATE SIGNING REQUEST, SEND IT TO CLUSTER THAT WILL SIGN THIS REQUEST AND RETURN SIGNED CERTIFICATE ( WHICH IS ACTUALLY
+A PUBLIC KEY THAT IS SIGNED). THATS IT, NOW THIS USER CAN SEND REQUESTS TO THE CLUSTER.
+Certificate read public key = openssl x509 -in client.crt -text -noout
+Ssh into node  = minikube ssh -p three -n three
+Private key create = openssl genrsa -out dave.key 2048
+Create a csr (Certificate Signing Request), to prepare everything needed to the actual certificate creation. =  openssl req -new -key dave.key -out dave.csr -subj "/CN=dave/O=users"
+Sign certificate =  openssl x509 -req -in dave.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out dave.crt -days 3540
+kubectl get pods --kubeconfig daveconfig
+
+-------------- EXAMPLES ------------------------------------------------------
+Pods show with names and releases = kubectl get pods --selector="app.k8s.io/name in (appB, appC)","app.k8s.io/release in (2, 3)"
+Pods start 5 with Network         = minikube start -p five -n 5 --network-plugin=cni --cni=calico
+Pods get and grep                 = kubectl get pods -p wide | grep 03
+Pods exec into                    = kubectl exec -it net-deployment-5bb5595f8f-9d9p9 -- sh
+Nod ssh into it                   = minikube ssh -p <profile name> -n <node name>
+Show network traffic              = tcpdump
+Tunnel run                        = minikube -p vadim tunnel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
