@@ -4,6 +4,7 @@
 # This provider supports setting the provider version, AWS credentials as well as the region.
 # It can also pull credentials and the region to use from environment variables, which we have set, so we'll use those
 
+
 terraform {
   required_providers {
     aws = {
