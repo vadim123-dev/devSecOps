@@ -1,0 +1,24 @@
+terraform-aws-infra/
+├── main.tf              ← root: wires modules together
+├── variables.tf         ← root: input variables
+├── outputs.tf           ← root: expose final values
+├── terraform.tfvars     ← your actual values (not committed to git)
+├── provider.tf          ← AWS provider config
+│
+└── modules/
+    ├── vpc/
+    │   ├── main.tf
+    │   ├── variables.tf
+    │   └── outputs.tf
+    ├── subnets/
+    │   ├── main.tf
+    │   ├── variables.tf
+    │   └── outputs.tf
+    ├── security_groups/
+    │   ├── main.tf
+    │   ├── variables.tf
+    │   └── outputs.tf
+    └── ec2/
+        ├── main.tf
+        ├── variables.tf
+        └── outputs.tf
